@@ -426,24 +426,10 @@ class MySiteViewModel @Inject constructor(
                                 onFooterLinkClick = this::onPostCardFooterLinkClick
                         ),
                         bloggingPromptCardBuilderParams = BloggingPromptCardBuilderParams(
-                                // TODO @klymyam fetch the actual blogging prompt
                                 bloggingPrompt = if (bloggingPromptsFeatureConfig.isEnabled()) {
-                                    @Suppress("MagicNumber")
-                                    val dummyRespondent = BloggingPromptRespondent(
-                                            54279365,
-                                            "https://0.gravatar.com/avatar/cec64efa352617" +
-                                                    "c35743d8ed233ab410?s=96&d=identicon&r=G"
-                                    )
-                                    BloggingPrompt(
-                                            "Cast the movie of your life",
-                                            "",
-                                            listOf(
-                                                    dummyRespondent,
-                                                    dummyRespondent,
-                                                    dummyRespondent,
-                                                    dummyRespondent,
-                                                    dummyRespondent
-                                            )
+                                    BloggingPrompt.Tmp.copy(
+                                            content = "",
+                                            respondents = BloggingPromptRespondent.TmpList
                                     )
                                 } else null,
                                 onShareClick = this::onBloggingPromptShareClick,
@@ -1139,16 +1125,8 @@ class MySiteViewModel @Inject constructor(
         onShare.postValue(Event(message))
     }
 
-    @Suppress("MaxLineLength")
-    /* ktlint-disable max-line-length */
     private fun onBloggingPromptAnswerClick() {
-        val bloggingPrompt = BloggingPrompt(
-                text = "Cast the movie of your life.",
-                content = "<!-- wp:pullquote -->\n" +
-                        "<figure class=\"wp-block-pullquote\"><blockquote><p>You have 15 minutes to address the whole world live (on television or radio — choose your format). What would you say?</p><cite>(courtesy of plinky.com)</cite></blockquote></figure>\n" +
-                        "<!-- /wp:pullquote -->",
-                respondents = emptyList()
-        )
+        val bloggingPrompt = BloggingPrompt.Tmp
         val selectedSite = requireNotNull(selectedSiteRepository.getSelectedSite())
         _onAnswerBloggingPrompt.postValue(Event(Pair(bloggingPrompt, selectedSite)))
     }

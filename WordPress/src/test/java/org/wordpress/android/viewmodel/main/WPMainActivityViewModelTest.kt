@@ -395,13 +395,7 @@ class WPMainActivityViewModelTest : BaseUnitTest() {
         } as AnswerBloggingPromptAction?
         assertThat(action).isNotNull
         action!!.onClickAction?.invoke()
-        val bloggingPrompt = BloggingPrompt(
-                text = "Cast the movie of your life.",
-                content = "<!-- wp:pullquote -->\n" +
-                        "<figure class=\"wp-block-pullquote\"><blockquote><p>You have 15 minutes to address the whole world live (on television or radio — choose your format). What would you say?</p><cite>(courtesy of plinky.com)</cite></blockquote></figure>\n" +
-                        "<!-- /wp:pullquote -->",
-                respondents = emptyList()
-        )
+        val bloggingPrompt = BloggingPrompt.Tmp
         assertThat(viewModel.createPostWithBloggingPrompt.value).isEqualTo(bloggingPrompt)
     }
 

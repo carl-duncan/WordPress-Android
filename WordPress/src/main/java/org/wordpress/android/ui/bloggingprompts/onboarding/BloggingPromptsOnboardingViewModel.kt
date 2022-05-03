@@ -29,18 +29,10 @@ class BloggingPromptsOnboardingViewModel @Inject constructor(
     private lateinit var dialogType: DialogType
     private lateinit var bloggingPrompt: BloggingPrompt
 
-    @Suppress("MaxLineLength")
-    /* ktlint-disable max-line-length */
     fun start(type: DialogType) {
         dialogType = type
         // TODO @RenanLukas get BloggingPrompt from Store when it's ready
-        bloggingPrompt = BloggingPrompt(
-                text = "Cast the movie of your life.",
-                content = "<!-- wp:pullquote -->\n" +
-                        "<figure class=\"wp-block-pullquote\"><blockquote><p>You have 15 minutes to address the whole world live (on television or radio — choose your format). What would you say?</p><cite>(courtesy of plinky.com)</cite></blockquote></figure>\n" +
-                        "<!-- /wp:pullquote -->",
-                respondents = emptyList()
-        )
+        bloggingPrompt = BloggingPrompt.Tmp
         _uiState.value = uiStateMapper.mapReady(dialogType, ::onPrimaryButtonClick, ::onSecondaryButtonClick)
     }
 

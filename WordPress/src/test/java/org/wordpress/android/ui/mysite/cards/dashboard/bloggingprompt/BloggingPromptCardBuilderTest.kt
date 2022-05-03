@@ -62,15 +62,11 @@ private val RESPONDENTS = listOf(
         )
 )
 
-/* ktlint-disable max-line-length */
 @RunWith(MockitoJUnitRunner::class)
 class BloggingPromptCardBuilderTest : BaseUnitTest() {
     private lateinit var builder: BloggingPromptCardBuilder
-    private val bloggingPrompt = BloggingPrompt(
+    private val bloggingPrompt = BloggingPrompt.Tmp.copy(
             text = PROMPT_TITLE,
-            content = "<!-- wp:pullquote -->\n" +
-                    "<figure class=\"wp-block-pullquote\"><blockquote><p>You have 15 minutes to address the whole world live (on television or radio — choose your format). What would you say?</p><cite>(courtesy of plinky.com)</cite></blockquote></figure>\n" +
-                    "<!-- /wp:pullquote -->",
             respondents = RESPONDENTS
     )
 

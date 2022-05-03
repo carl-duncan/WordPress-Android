@@ -19,20 +19,7 @@ class BloggingPromptsOnboardingUiStateMapper @Inject constructor() {
         onPrimaryButtonClick: () -> Unit,
         onSecondaryButtonClick: () -> Unit
     ): Ready {
-        val dummyRespondent = BloggingPromptRespondent(
-                54279365,
-                "https://0.gravatar.com/avatar/cec64efa352617" +
-                        "c35743d8ed233ab410?s=96&d=identicon&r=G"
-        )
-
-        val dummyRespondents = listOf(
-                dummyRespondent,
-                dummyRespondent,
-                dummyRespondent,
-                dummyRespondent,
-                dummyRespondent
-        )
-
+        val dummyRespondents = BloggingPromptRespondent.TmpList
         val trailingLabel = UiStringPluralRes(
                 R.plurals.my_site_blogging_prompt_card_number_of_answers,
                 dummyRespondents.size
