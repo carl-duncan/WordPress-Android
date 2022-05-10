@@ -1,6 +1,7 @@
 package org.wordpress.android.models.bloggingprompts
 
 data class BloggingPrompt(
+    val id: Int,
     val text: String,
     val content: String,
     val respondents: List<BloggingPromptRespondent>
@@ -8,6 +9,7 @@ data class BloggingPrompt(
     companion object {
         // TODO @RenanLukas get BloggingPrompt from Store when it's ready
         val Tmp = BloggingPrompt(
+                id = 1234,
                 text = "Cast the movie of your life.",
                 content = "<!-- wp:pullquote -->\n" +
                         "<figure class=\"wp-block-pullquote\"><blockquote><p>" +

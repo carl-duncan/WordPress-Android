@@ -38,7 +38,7 @@ class BloggingPromptsOnboardingViewModel @Inject constructor(
 
     private fun onPrimaryButtonClick() {
         val action = when (dialogType) {
-            ONBOARDING -> OpenEditor(bloggingPrompt.content)
+            ONBOARDING -> OpenEditor(bloggingPrompt.id)
             INFORMATION -> DismissDialog
         }
         _action.value = action

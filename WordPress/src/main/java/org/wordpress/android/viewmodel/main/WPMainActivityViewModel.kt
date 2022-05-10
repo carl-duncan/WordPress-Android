@@ -209,7 +209,6 @@ class WPMainActivityViewModel @Inject constructor(
     private fun onAnswerPromptActionClicked() {
         // TODO @klymyam add analytics
         _isBottomSheetShowing.postValue(Event(false))
-
         val bloggingPrompt = BloggingPrompt.Tmp
         _createPostWithBloggingPrompt.postValue(bloggingPrompt)
     }

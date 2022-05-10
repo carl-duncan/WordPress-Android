@@ -12,7 +12,7 @@ import org.wordpress.android.push.NotificationPushIds.REMINDER_NOTIFICATION_ID
 import org.wordpress.android.ui.ActivityLauncher
 import org.wordpress.android.ui.notifications.DismissNotificationReceiver
 import org.wordpress.android.util.SiteUtils
-import org.wordpress.android.util.config.BloggingPromptsNotificationConfig
+import org.wordpress.android.util.config.BloggingPromptsFeatureConfig
 import org.wordpress.android.viewmodel.ContextProvider
 import org.wordpress.android.viewmodel.ResourceProvider
 import javax.inject.Inject
@@ -23,7 +23,7 @@ class PromptReminderNotifier @Inject constructor(
     val siteStore: SiteStore,
     val accountStore: AccountStore,
     val reminderNotificationManager: ReminderNotificationManager,
-    val bloggingPromptsNotificationConfig: BloggingPromptsNotificationConfig
+    val bloggingPromptsFeatureConfig: BloggingPromptsFeatureConfig
 ) {
     // TODO @RenanLukas replace with remote field in SiteModel after endpoint integration
     var hasOptedInBloggingPromptsReminders = true
@@ -35,13 +35,11 @@ class PromptReminderNotifier @Inject constructor(
         val context = contextProvider.getContext()
         val site = siteStore.getSiteByLocalId(siteId) ?: return
         val siteName = SiteUtils.getSiteNameOrHomeURL(site)
-        // TODO @RenanLukas get BloggingPrompt from Store when it's ready
         val bloggingPrompt = BloggingPrompt.Tmp
         val openEditorRequestCode = notificationId + 1
         val openEditorPendingIntent = PendingIntent.getActivity(
             context,
             openEditorRequestCode,
-            // TODO @RenanLukas send BloggingPrompt with OpenEditor action when prompt store is ready
             ActivityLauncher.openEditorWithPromptAndDismissNotificationIntent(context, notificationId, bloggingPrompt),
             PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
@@ -85,10 +83,10 @@ class PromptReminderNotifier @Inject constructor(
 
     fun shouldNotify(siteId: Int): Boolean {
         val hasAccessToken = accountStore.hasAccessToken()
-        val isBloggingPromptsNotificationEnabled = bloggingPromptsNotificationConfig.isEnabled()
+        val isBloggingPromptsEnabled = bloggingPromptsFeatureConfig.isEnabled()
         val siteModel = siteStore.getSiteByLocalId(siteId)
         val hasOptedInBloggingPromptsReminders = siteModel != null && hasOptedInBloggingPromptsReminders
-        return hasAccessToken && isBloggingPromptsNotificationEnabled && hasOptedInBloggingPromptsReminders
+        return hasAccessToken && isBloggingPromptsEnabled && hasOptedInBloggingPromptsReminders
     }
 
     companion object {
